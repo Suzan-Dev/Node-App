@@ -1,0 +1,15 @@
+name: Release
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - run: docker build . -t suzandev/nest-app
+    - run: echo "${{DOCKERHUB_PASSWORD}}" | docker login -u ${{DOCKERHUB_USERNAME}} --password-stdin
+    - run: docker push suzandev/nest-app

@@ -1,0 +1,16 @@
+name: Discord Notify
+
+on:
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run Discord Webhook
+      uses: johnnyhuy/actions-discord-git-webhook@main 
+      with:
+        webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
